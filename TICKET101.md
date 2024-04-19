@@ -14,6 +14,7 @@ Overall, the UI is clean and not cluttered.
 
 #### Loan amount correction
 
+This could be considered the biggest shortcoming of the implementation.
 The approved loan amount and duration function is not working as expected - when a larger loan is available for the user selected period,
 the program does not return the possible larger approved loan. Example case below:
 

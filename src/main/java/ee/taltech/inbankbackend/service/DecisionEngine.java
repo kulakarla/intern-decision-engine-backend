@@ -64,6 +64,7 @@ public class DecisionEngine {
         return new Decision(outputLoanAmount, loanPeriod, null);
     }
 
+
     /**
      * Calculates the largest valid loan for the current credit modifier and loan period.
      *
