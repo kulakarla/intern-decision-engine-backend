@@ -1,4 +1,6 @@
 ## Ticket 101 Code Review
+NOTE: Code review is about the code in the `ticket101-code-review` branch, as the `main` branch is updated.
+When looking at code line numbers, please make sure you are on the right branch.
 
 ### 1 | Requirements & Implementation
 
@@ -10,13 +12,13 @@ It can quickly be noticed that the loan period slider label indicates the range 
 when the requirements state that allowed loan duration should be >= 12. Slider itself selects the right values, 
 label is inaccurate. In addition, the results (approved loan & duration) are not well distinguished from
 the input sliders, possibly causing confusion. The results should be enunciated more than the input sliders.
-Overall, the UI is clean and not cluttered.
+Overall however, the UI is clean and not cluttered.
 
 #### Loan amount correction
 
 This could be considered the biggest shortcoming of the implementation.
 The approved loan amount and duration function is not working as expected - when a larger loan is available for the user selected period,
-the program does not return the possible larger approved loan. Example case below:
+the program does not show the possible larger approved loan. Example case below:
 
 
 | Personal Code 	| Credit Modifier 	 | Input loan amount   	 | Input loan duration 	 | Expected loan amount 	 | Expected loan duration 	 | Actual loan amount 	 | Actual loan duration 	 | Fault 	                                                                   |
@@ -26,7 +28,7 @@ the program does not return the possible larger approved loan. Example case belo
 
 #### Constraints
 
-It is not stated in the requirements that the loan duration can be only multiples of 6, nor is it said that loan amount should be fixed to multiples of 100.
+It is not explicitly stated in the requirements that the loan duration can be only multiples of 6, nor is it said that loan amount should be fixed to multiples of 100.
 
 
 ### 2 | Code
@@ -42,7 +44,7 @@ wrong loan amounts & durations due to unnecessary conditional. Needs addressing.
 #### Back end
 
 The code is well-commented, methods are short, no deep nesting, variable names consistent. Code aesthetics 
-are on point. The code is mostly readable, yet some things should be pointed out and corrected.
+are on point. The code is mostly readable, yet some things can be pointed out and corrected.
 
 `ee/taltech/inbankbackend/service/DecisionEngine.java` method `verifyInputs` lines `117-124` use negation for comparisons for no reason,
 reducing code readability. Negation should be removed, it is unnecessary.
