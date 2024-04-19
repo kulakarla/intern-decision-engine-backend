@@ -28,7 +28,8 @@ the program does not show the possible larger approved loan. Example case below:
 
 #### Constraints
 
-It is not explicitly stated in the requirements that the loan duration can be only multiples of 6, nor is it said that loan amount should be fixed to multiples of 100.
+It is not explicitly stated in the requirements that the loan duration can be only multiples of 6, nor is it said that loan amount should be fixed to multiples of 100,
+yet the implementation has these constraints. 
 
 
 ### 2 | Code
@@ -48,4 +49,8 @@ are on point. The code is mostly readable, yet some things can be pointed out an
 
 `ee/taltech/inbankbackend/service/DecisionEngine.java` method `verifyInputs` lines `117-124` use negation for comparisons for no reason,
 reducing code readability. Negation should be removed, it is unnecessary.
+
+#### Tests
+
+Both back and front end contain appropriate tests, well done.
 
