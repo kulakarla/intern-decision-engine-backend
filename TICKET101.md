@@ -52,5 +52,6 @@ reducing code readability. Negation should be removed, it is unnecessary.
 
 #### Tests
 
-Both back and front end contain appropriate tests, well done.
+Both back and front end contain appropriate tests, well done. Front-end could use some tests that verify 
+that the program shows the user the right values.
 
