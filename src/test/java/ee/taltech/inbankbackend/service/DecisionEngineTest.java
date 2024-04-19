@@ -70,6 +70,16 @@ class DecisionEngineTest {
                 () -> decisionEngine.calculateApprovedLoan(invalidPersonalCode, 4000L, 12));
     }
 
+
+    @Test
+    void testMethod() throws InvalidLoanPeriodException, NoValidLoanException, InvalidPersonalCodeException, InvalidLoanAmountException {
+        Long loanAmount = 2000L;
+        int loanPeriod = 48;
+
+        Decision decision = decisionEngine.calculateApprovedLoan("50307172740", loanAmount, loanPeriod);
+
+        assertEquals(4800, decision.getLoanAmount());
+    }
     @Test
     void testInvalidLoanAmount() {
         Long tooLowLoanAmount = DecisionEngineConstants.MINIMUM_LOAN_AMOUNT - 1L;

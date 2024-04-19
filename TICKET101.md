@@ -36,13 +36,13 @@ It is not stated in the requirements that the loan duration can be only multiple
 The code itself is clean, organization could use a services and themes folder for a cleaner look, following 
 an organization pattern similar to the back-end.
 
+`lib/widgets/loan_form.dart` contains faulty code in lines `41-47`. This faulty updating is the cause of displaying 
+wrong loan amounts & durations due to unnecessary conditional. Needs addressing.
+
 #### Back end
 
 The code is well-commented, methods are short, no deep nesting, variable names consistent. Code aesthetics 
 are on point. The code is mostly readable, yet some things should be pointed out and corrected.
-
-`ee/taltech/inbankbackend/service/DecisionEngine.java` method `calculateApprovedLoan` lines `54-62` contains logic for 
-determining the loan amount or duration. The logic is confusing, faulty and the code could be extracted as a new method for readability.
 
 `ee/taltech/inbankbackend/service/DecisionEngine.java` method `verifyInputs` lines `117-124` use negation for comparisons for no reason,
 reducing code readability. Negation should be removed, it is unnecessary.

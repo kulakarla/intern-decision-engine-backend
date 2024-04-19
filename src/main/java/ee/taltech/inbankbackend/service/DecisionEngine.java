@@ -51,6 +51,7 @@ public class DecisionEngine {
             throw new NoValidLoanException("No valid loan found!");
         }
 
+
         while (highestValidLoanAmount(loanPeriod) < DecisionEngineConstants.MINIMUM_LOAN_AMOUNT) {
             loanPeriod++;
         }
