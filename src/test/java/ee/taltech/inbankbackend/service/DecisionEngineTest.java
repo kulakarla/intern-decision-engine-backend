@@ -108,5 +108,22 @@ class DecisionEngineTest {
                 () -> decisionEngine.calculateApprovedLoan(debtorPersonalCode, 10000L, 60));
     }
 
+    @Test
+    void testTooYoungForALoanThrowsException() {
+        String personalCode = "51312096020";
+        NoValidLoanException exception = assertThrows(NoValidLoanException.class, () -> decisionEngine.calculateApprovedLoan(personalCode, 2000L, 20));
+        String expectedMessage = "Unfortunately, your age does not meet the requirements!";
+        assertEquals(expectedMessage, exception.getMessage());
+    }
+
+    @Test
+    void testTooOldForALoanThrowsException() {
+        String personalCode = "42501146567";
+        NoValidLoanException exception = assertThrows(NoValidLoanException.class, () -> decisionEngine.calculateApprovedLoan(personalCode, 2000L, 20));
+        String expectedMessage = "Unfortunately, your age does not meet the requirements!";
+        assertEquals(expectedMessage, exception.getMessage());
+
+    }
+
 }
 

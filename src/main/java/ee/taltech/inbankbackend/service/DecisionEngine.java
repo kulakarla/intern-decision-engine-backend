@@ -8,6 +8,12 @@ import ee.taltech.inbankbackend.exceptions.InvalidPersonalCodeException;
 import ee.taltech.inbankbackend.exceptions.NoValidLoanException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.time.Period;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * A service class that provides a method for calculating an approved loan amount and period for a customer.
  * The loan amount is calculated based on the customer's credit modifier,
@@ -51,6 +57,10 @@ public class DecisionEngine {
             throw new NoValidLoanException("No valid loan found!");
         }
 
+        if (!verifyAge(personalCode)) {
+            throw new NoValidLoanException("Unfortunately, your age does not meet the requirements!");
+        }
+
         while (highestValidLoanAmount(loanPeriod) < DecisionEngineConstants.MINIMUM_LOAN_AMOUNT) {
             loanPeriod++;
         }
@@ -62,6 +72,40 @@ public class DecisionEngine {
         }
 
         return new Decision(outputLoanAmount, loanPeriod, null);
+    }
+
+    /**
+     * Boolean method to check whether the person fits the age requirements for a loan
+     *
+     * @param personalCode personal code to determine the birthday
+     * @return true if the person is fit for a loan, false otherwise
+     */
+    private boolean verifyAge(String personalCode) {
+
+        int century = Integer.parseInt(personalCode.substring(0, 1));
+
+        if (century < 3) {
+            century = 1800;
+        } else if (century < 5) {
+            century = 1900;
+        } else {
+            century = 2000;
+        }
+
+        int year = century + Integer.parseInt(personalCode.substring(1, 3));
+        int birthMonth = Integer.parseInt(personalCode.substring(3, 5));
+        int birthCalendarDay = Integer.parseInt(personalCode.substring(5, 7));
+
+        LocalDate birthDay = LocalDate.of(year, birthMonth, birthCalendarDay);
+        LocalDate currentTime = LocalDate.now();
+
+        Period age = Period.between(birthDay, currentTime);
+
+        LocalDate dateAfter60Months = currentTime.plusMonths(DecisionEngineConstants.MAXIMUM_LOAN_PERIOD);
+        Period futureAge = Period.between(birthDay, dateAfter60Months);
+
+        return futureAge.getYears() <= DecisionEngineConstants.MAX_EXPECTED_LIFETIME && age.getYears() >= DecisionEngineConstants.AGE_OF_ADULTHOOD;
+
     }
 
     /**
