@@ -1,6 +1,6 @@
 ## Ticket 101 Code Review
 
-### 1 Requirements & Implementation
+### 1 | Requirements & Implementation
 
 The code does not completely work as required, bugs can be found. 
 
@@ -29,7 +29,7 @@ the program does not return the possible larger approved loan. Example case belo
 It is not stated in the requirements that the loan duration can be only multiples of 6, nor is it said that loan amount should be fixed to multiples of 100.
 
 
-### 2 Code
+### 2 | Code
 
 #### Front End
 
